@@ -5,14 +5,8 @@ services:
     container_name: nginx
     ports:
       - 8080:80
-  wordpress:
-    build: wordpress
-    container_name: wordpress
-    environment:
-      - DB_HOST=mariadb:3306
-      - DB_NAME=wordpress
-      - DB_USER=wordpress
-      - DB_PASSWORD=wordpress
+    depends_on:
+      - wordpress
   mariadb:
     build: mariadb
     container_name: mariadb
@@ -23,3 +17,13 @@ services:
       - MARIADB_USER=wordpress
       - MARIADB_PASSWORD=wordpress
       - MARIADB_DATABASE=wordpress
+  wordpress:
+    build: wordpress
+    container_name: wordpress
+    environment:
+      - DB_HOST=mariadb:3306
+      - DB_NAME=wordpress
+      - DB_USER=wordpress
+      - DB_PASSWORD=wordpress
+    depends_on: 
+      - mariadb
