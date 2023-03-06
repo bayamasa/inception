@@ -25,5 +25,7 @@ services:
       - DB_NAME=wordpress
       - DB_USER=wordpress
       - DB_PASSWORD=wordpress
+    ports:
+      - 9000:9000
     depends_on: 
       - mariadb
