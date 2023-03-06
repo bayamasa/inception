@@ -15,6 +15,9 @@ RUN echo deb-src https://nginx.org/packages/mainline/debian/ buster nginx \
 
 RUN apt-get update && \
     apt-get install -y nginx
+    
+RUN mkdir -p /var/www/html
 
+COPY conf/default.conf /etc/nginx/conf.d/
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
