@@ -19,9 +19,9 @@ RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html/wordpress
-RUN wp core download --path=/var/www/html/wordpress --allow-root
-RUN wp config create --dbname=wordpress --dbuser=wordpress --dbpass=wordpress --dbhost=mariadb:3306 --allow-root --skip-check --path=/var/www/html/wordpress
-RUN wp core install --url=http://example.com/ --title=test --admin_user=wordpress_user --admin_password=password --admin_email=test@example.com --allow-root --path=/var/www/html/wordpress
+COPY tool/setting.sh /usr/bin/
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 
-RUN mkdir /run/php
-ENTRYPOINT ["php-fpm7.3", "-F"]
+ENTRYPOINT ["sh", "/usr/bin/setting.sh"]
+
+CMD [ "php-fpm7.3", "-F" ]
