@@ -11,8 +11,8 @@ ENV MARIADB_USER wordpress
 ENV MARIADB_PASSWORD wordpress
 ENV MARIADB_DATABASE wordpress
 
-COPY tool/50-server.cnf /etc/mysql/mariadb.conf.d/
-COPY tool/50-client.cnf /etc/mysql/mariadb.conf.d/
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY conf/50-client.cnf /etc/mysql/mariadb.conf.d/
 COPY tool/entry-point.sh /usr/bin/
 
 EXPOSE 3306
