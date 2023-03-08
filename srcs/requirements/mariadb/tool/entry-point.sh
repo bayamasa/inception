@@ -40,9 +40,12 @@ _main() {
     echo "Temporary server started."
 
     docker_exec_client << EOS
+    FLUSH PRIVILEGES;
     CREATE DATABASE $MARIADB_DATABASE;
     CREATE USER $MARIADB_USER IDENTIFIED BY '$MARIADB_PASSWORD';
     GRANT ALL PRIVILEGES ON $MARIADB_DATABASE.* TO '$MARIADB_USER'@'%';
+    SET PASSWORD FOR root@localhost=PASSWORD('$MARIADB_ROOT_PASSWORD');
+    FLUSH PRIVILEGES;
 EOS
 
     echo "Stopping temporary server"
