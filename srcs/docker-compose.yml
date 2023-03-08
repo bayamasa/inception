@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   nginx:
-    build: nginx
+    build: ./requirements/nginx
     container_name: nginx
     ports:
       - 8080:80
@@ -10,7 +10,7 @@ services:
     volumes:
       - wordpress_files:/var/www/html
   mariadb:
-    build: mariadb
+    build: ./requirements/mariadb
     container_name: mariadb
     ports:
       - 3306:3306
@@ -22,7 +22,7 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
   wordpress:
-    build: wordpress
+    build: ./requirements/wordpress
     container_name: wordpress
     environment:
       - DB_HOST=mariadb:3306
