@@ -11,14 +11,17 @@ up:
 down:
 	docker compose $(FILE) down
 	
+.PHONY: build
+build:
+	docker compose $(FILE) build
+	
 .PHONY: run
-run: up $(RM_ORPHANS)
+run: 
+	docker compose $(FILE) up --build $(RM_ORPHANS)
 
-.PHONY: delete_all
-delete_all:
-	down --rmi all --volumes $(RM_ORPHANS)
+.PHONY: clean
+clean:
+	docker compose $(FILE) down --rmi all --volumes $(RM_ORPHANS)
 
-.PHONY restart
-restart:
-	down 
-	up --build
+.PHONY: restart
+restart: down build up
