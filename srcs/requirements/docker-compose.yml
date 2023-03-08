@@ -7,6 +7,8 @@ services:
       - 8080:80
     depends_on:
       - wordpress
+    volumes:
+      - wordpress_files:/var/www/html
   mariadb:
     build: mariadb
     container_name: mariadb
@@ -17,6 +19,8 @@ services:
       - MARIADB_USER=wordpress
       - MARIADB_PASSWORD=wordpress
       - MARIADB_DATABASE=wordpress
+    volumes:
+      - mysql_data:/var/lib/mysql
   wordpress:
     build: wordpress
     container_name: wordpress
@@ -25,7 +29,10 @@ services:
       - DB_NAME=wordpress
       - DB_USER=wordpress
       - DB_PASSWORD=wordpress
-    ports:
-      - 9000:9000
     depends_on: 
       - mariadb
+    volumes:
+      - wordpress_files:/var/www/html
+volumes:
+  wordpress_files:
+  mysql_data:
