@@ -8,31 +8,41 @@ services:
     depends_on:
       - wordpress
     volumes:
-      - wordpress_files:/var/www/html
+      - wordpress_files:${WORDPRESS_FILES_PATH}
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
     ports:
       - 3306:3306
     environment:
-      - MARIADB_ROOT_PASSWORD=root
-      - MARIADB_USER=wordpress
-      - MARIADB_PASSWORD=wordpress
-      - MARIADB_DATABASE=wordpress
+      - MARIADB_ROOT_PASSWORD=${MARIADB_ROOT_PASSWORD}
+      - MARIADB_USER=${MARIADB_USER}
+      - MARIADB_PASSWORD=${MARIADB_PASSWORD}
+      - MARIADB_DATABASE=${MARIADB_DATABASE}
     volumes:
       - mysql_data:/var/lib/mysql
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
     environment:
-      - DB_HOST=mariadb:3306
-      - DB_NAME=wordpress
-      - DB_USER=wordpress
-      - DB_PASSWORD=wordpress
+      - DB_HOST=mariadb
+      - DB_PORT=3306
+      - DB_NAME=${MARIADB_DATABASE}
+      - DB_USER=${MARIADB_USER}
+      - DB_PASS=${MARIADB_PASSWORD}
+      - WORDPRESS_FILES_PATH=${WORDPRESS_FILES_PATH}
+      - WP_USER=${WP_USER}
+      - WP_PASS=${WP_PASS}
+      - WP_EMAIL=${WP_EMAIL}
+      - WP_ADMIN_USER=${WP_ADMIN_USER}
+      - WP_ADMIN_PASS=${WP_ADMIN_PASS}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
+      - WP_URL=${WP_URL}
+      - WP_TITLE=${WP_TITLE}
     depends_on: 
       - mariadb
     volumes:
-      - wordpress_files:/var/www/html
+      - wordpress_files:${WORDPRESS_FILES_PATH}
 volumes:
   wordpress_files:
   mysql_data:

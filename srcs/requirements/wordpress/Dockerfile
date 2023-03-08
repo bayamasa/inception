@@ -25,7 +25,7 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN mkdir -p /var/www/html
 RUN mkdir -p /usr/log
-COPY tool/setting.sh /usr/bin/
+COPY tools/setting.sh /usr/bin/
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d/
 
 ENTRYPOINT ["sh", "/usr/bin/setting.sh"]
