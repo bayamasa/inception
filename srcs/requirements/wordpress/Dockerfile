@@ -2,12 +2,11 @@ FROM debian:buster
 
 RUN apt-get update && \
     apt-get install -y php \
-    php-cgi \
     php-fpm \
-    php-common \
-    php-pear \ 
     php-mbstring \
     php-mysqli \
+    php-fileinfo \
+    php-json \
     php-curl \
     php-imagick \
     php-zip \
