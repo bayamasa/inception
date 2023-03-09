@@ -13,6 +13,7 @@ RUN apt-get update && \
     php-zip \
     php-xml \
     php-dom \
+    sendmail \
     vim \
     curl \
     wget \
