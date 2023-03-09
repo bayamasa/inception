@@ -4,7 +4,7 @@ services:
     build: ./requirements/nginx
     container_name: nginx
     ports:
-      - 8080:80
+      - 443:443
     depends_on:
       - wordpress
     volumes:
@@ -37,7 +37,7 @@ services:
       - WP_ADMIN_USER=${WP_ADMIN_USER}
       - WP_ADMIN_PASS=${WP_ADMIN_PASS}
       - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
-      - WP_URL=${WP_URL}
+      - DOMAIN_NAME=${DOMAIN_NAME}
       - WP_TITLE=${WP_TITLE}
     depends_on: 
       - mariadb

@@ -19,7 +19,7 @@ if ! wp core is-installed $WP_OPT > /dev/null 2>&1 ; then
                      --dbhost=$DB_HOST \
                      $WP_OPT --skip-check 
 
-    wp core install --url=$WP_URL \
+    wp core install --url=$DOMAIN_NAME \
                     --title=$WP_TITLE \
                     --admin_user=$WP_ADMIN_USER \
                     --admin_password=$WP_ADMIN_PASS \
@@ -35,8 +35,8 @@ if ! wp core is-installed $WP_OPT > /dev/null 2>&1 ; then
 fi
 
 
-# chmod -R 775 /var/www/*
-# chown -R www-data:www-data /var/www/*
+chmod -R 775 /var/www/*
+chown -R www-data:www-data /var/www/*
 mkdir -p /run/php/
 
 exec "$@"

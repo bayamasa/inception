@@ -21,5 +21,8 @@ RUN apt-get update && \
 
 COPY conf/nginx.conf /etc/nginx/
 COPY conf/default.conf /etc/nginx/conf.d/
+COPY tools/setting.sh /usr/bin/
+
+RUN sh /usr/bin/setting.sh
 
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
