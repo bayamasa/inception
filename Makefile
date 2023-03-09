@@ -25,4 +25,4 @@ clean:
 	docker compose $(FILE) down --rmi all --volumes $(RM_ORPHANS)
 
 .PHONY: restart
-restart: down build up
+restart: clean run
