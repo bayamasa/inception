@@ -3,10 +3,9 @@ RM_ORPHANS = --remove-orphans
 BASH = /bin/bash
 FILE = -f ./srcs/docker-compose.yml
 
-# TODO:デバッグ用にupにしてるけど 最終 -dにする
 .PHONY: up
 up:
-	docker compose $(FILE) up
+	docker compose $(FILE) up -d
 
 .PHONY: down
 down:
@@ -18,7 +17,7 @@ build:
 	
 .PHONY: run
 run: 
-	docker compose $(FILE) up --build $(RM_ORPHANS)
+	docker compose $(FILE) up -d --build $(RM_ORPHANS)
 
 .PHONY: clean
 clean:
