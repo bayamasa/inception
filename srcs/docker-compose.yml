@@ -45,4 +45,14 @@ services:
       - wordpress_files:${WORDPRESS_FILES_PATH}
 volumes:
   wordpress_files:
+    driver: local
+    driver_opts:
+      device: /home/mhirabay/data/wordpress
+      o: bind
+      type: none
   mysql_data:
+    driver: local
+    driver_opts:
+      device: /home/mhirabay/data/mysql
+      o: bind
+      type: none
